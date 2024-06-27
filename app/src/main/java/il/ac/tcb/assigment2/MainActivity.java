@@ -15,7 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import il.ac.tcb.assigment2.models.AppDatabase;
+import il.ac.tcb.assigment2.models.UserDao;
+import il.ac.tcb.assigment2.models.UserEntity;
 import il.ac.tcb.assigment2.results.Results;
 import il.ac.tcb.assigment2.results.User;
 import il.ac.tcb.assigment2.results.UserAPIClient;
@@ -27,7 +31,7 @@ import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
-    //public PersonDatabase db;
+    public AppDatabase db;
     private Button button;
     private TextView textView;
     private Results results;
@@ -121,8 +125,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        db = PersonDatabase.getInstance(this);
-//        db.personDao().deleteAll();
+        db = AppDatabase.getInstance(this);
+        db.userDao().deleteAll();
 
         context = this;
         TextView tvFname = findViewById(R.id.firstName);
@@ -151,10 +155,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         buttonAdd.setOnClickListener(v -> {
-//            if (isCorrect)
-//                AddEntry(user);
-//            else
-//                Toast.makeText(this, "Cannot add user to collection!", Toast.LENGTH_LONG).show();
+            if (isCorrect)
+                AddEntry(user);
+            else
+                Toast.makeText(this, "Cannot add user to collection!", Toast.LENGTH_LONG).show();
         });
 
         buttonCol.setOnClickListener(new View.OnClickListener() {
@@ -162,24 +166,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, UsersActivity.class);
                 startActivity(intent);
-//                List<Person> persons = db.personDao().getAll();
-//                for (Person person : persons) {
-//                    Log.d("Database data", person.toString());
-//                }
             }
         });
     }
 
-//    private void AddEntry(User user) {
-//        Person person = new Person();
-//        person.firstName = user.name.getFirst();
-//        person.lastName = user.name.getLast();
-//        person.age = user.dob.age;
-//        person.email = user.email;
-//        person.city = user.location.city;
-//        person.country = user.location.country;
-//        person.imageUrl = user.picture.large;
-//        person.uuid = user.login.uuid;
-//        db.personDao().insertPerson(person);
-//    }
+    private void AddEntry(User user) {
+        UserEntity person = new UserEntity();
+        person.firstName = user.name.getFirst();
+        person.lastName = user.name.getLast();
+        person.age = user.dob.age;
+        person.email = user.email;
+        person.city = user.location.city;
+        person.country = user.location.country;
+        person.imageUrl = user.picture.large;
+        person.uuid = user.login.uuid;
+        db.userDao().insertUser(person);
+    }
 }

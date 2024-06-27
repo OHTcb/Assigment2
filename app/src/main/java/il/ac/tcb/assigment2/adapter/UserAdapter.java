@@ -15,11 +15,11 @@ import java.util.List;
 import il.ac.tcb.assigment2.R;
 import il.ac.tcb.assigment2.models.UserEntity;
 
-public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder> {
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     private List<UserEntity> personList;
 
-    public PersonAdapter(List<UserEntity> personList) {
+    public UserAdapter(List<UserEntity> personList) {
         this.personList = personList;
     }
 
@@ -59,20 +59,11 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
 
         public ViewHolder(View view) {
             super(view);
-            imageView = view.findViewById(R.id.imageView);
-            firstNameTextView = view.findViewById(R.id.textViewFirstName);
-            lastNameTextView = view.findViewById(R.id.textViewLastName);
-            countryTextView = view.findViewById(R.id.textViewCountry);
-            cityTextView = view.findViewById(R.id.textViewCity);
+            imageView = view.findViewById(R.id.profilePicture);
+            firstNameTextView = view.findViewById(R.id.firstName);
+            lastNameTextView = view.findViewById(R.id.lastName);
+            countryTextView = view.findViewById(R.id.Country);
+            cityTextView = view.findViewById(R.id.City);
         }
     }
 }
-
-//            imageView = view.findViewById(R.id.imageView);
-//            firstNameTextView = view.findViewById(R.id.textViewFirstName);
-//            lastNameTextView = view.findViewById(R.id.textViewLastName);
-//            countryTextView = view.findViewById(R.id.textViewCountry);
-//            cityTextView = view.findViewById(R.id.textViewCity);
-
-// PersonAdapter = UserAdapter
-//Person = UserEntity
